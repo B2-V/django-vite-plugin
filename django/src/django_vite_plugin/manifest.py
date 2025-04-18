@@ -23,19 +23,24 @@ def load_manifest(manifest_path: Path) -> Dict[str, Any]:
     except Exception as error:
         raise RuntimeError(f"Cannot read Vite manifest file at {manifest_path}: {error}")
 
+
 def get_manifest_entry(path: str) -> Dict[str, Any]:
     """Get a manifest entry by path."""
     if path not in VITE_MANIFEST:
         raise RuntimeError(f"Cannot find {path} in Vite manifest")
     return VITE_MANIFEST[path]
 
-def get_manifest_css_files(manifest_entry: Dict[str, Any], attrs: Dict[str, str], already_processed: Union[set, None] = None) -> str:
+
+def get_manifest_css_files(
+        manifest_entry: Dict[str, Any],
+        attrs: Dict[str, str],
+        already_processed: Union[set, None] = None) -> str:
     """Get CSS files from manifest entry."""
     if already_processed is None:
         already_processed = set()
-    
+
     html = []
-    
+
     # Process imports recursively
     if 'imports' in manifest_entry:
         for import_path in manifest_entry['imports']:
@@ -44,7 +49,7 @@ def get_manifest_css_files(manifest_entry: Dict[str, Any], attrs: Dict[str, str]
                 attrs,
                 already_processed
             ))
-    
+
     # Process CSS files
     if 'css' in manifest_entry:
         for css_path in manifest_entry['css']:
@@ -54,5 +59,5 @@ def get_manifest_css_files(manifest_entry: Dict[str, Any], attrs: Dict[str, str]
                     attrs
                 ))
                 already_processed.add(css_path)
-    
-    return ''.join(html) 
+
+    return ''.join(html)

@@ -5,18 +5,12 @@ build-backend = "hatchling.build"
 [project]
 name = "django_vite_plugin"
 version = "4.1.1_dev"
-authors = [
-  { name="Stepan", email="" },
-]
-description = "Vite build tools integration for django"
+description = "Django integration with Vite"
+authors = [{ name = "Stepan Stanchev", email = "you@example.com" }]
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
+dependencies = ["django>=3.10"]
 
-[project.urls]
-"Homepage" = "https://github.com/B2-V/django-vite-plugin/"
-"Bug Tracker" = "https://github.com/B2-V/django-vite-plugin//issues"
+[tool.hatch.build.targets.wheel]
+packages = ["django/src/django_vite_plugin"]

@@ -4,8 +4,11 @@ from pathlib import Path
 from urllib.parse import urljoin
 from typing import Dict, Any, Union
 from .html import get_html
-from .constants import DEFAULT_CONFIG
 from .cache import VITE_MANIFEST
+from .config_helper import get_config
+
+CONFIG = get_config()
+
 
 def load_manifest(manifest_path: Path) -> Dict[str, Any]:
     """Load and cache the Vite manifest file."""
@@ -47,7 +50,7 @@ def get_manifest_css_files(manifest_entry: Dict[str, Any], attrs: Dict[str, str]
         for css_path in manifest_entry['css']:
             if css_path not in already_processed:
                 html.append(get_html(
-                    urljoin(DEFAULT_CONFIG['BUILD_URL_PREFIX'], css_path),
+                    urljoin(CONFIG['BUILD_URL_PREFIX'], css_path),
                     attrs
                 ))
                 already_processed.add(css_path)

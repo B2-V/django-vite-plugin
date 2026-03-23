@@ -13,4 +13,4 @@ requires-python = ">=3.10"
 dependencies = ["django>=3.2"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/django_vite_plugin"]
+packages = ["django/src/django_vite_plugin"]
